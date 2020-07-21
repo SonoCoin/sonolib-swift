@@ -1,0 +1,6 @@
+framework module Sonolib {
+  umbrella header "Sonolib-umbrella.h"
+
+  export *
+  module * { export * }
+}

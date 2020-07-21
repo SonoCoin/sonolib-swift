@@ -1,0 +1,6 @@
+framework module Pods_Sonolib_Tests {
+  umbrella header "Pods-Sonolib_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

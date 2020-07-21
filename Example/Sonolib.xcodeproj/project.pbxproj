@@ -8,18 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		0C66CBD27A1BFC655685F840 /* Pods_Sonolib_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1147F6474F379BCA9B059865 /* Pods_Sonolib_Tests.framework */; };
+		22424D8D24C7171F00BF90AF /* WalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22424D8824C7171F00BF90AF /* WalletTests.swift */; };
+		22424D9524C71BD600BF90AF /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22424D9224C71BD600BF90AF /* ClientTests.swift */; };
+		22424D9624C71BD600BF90AF /* CoinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22424D9324C71BD600BF90AF /* CoinTests.swift */; };
+		22424D9724C71BD600BF90AF /* ProxyClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22424D9424C71BD600BF90AF /* ProxyClientTests.swift */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1147F6474F379BCA9B059865 /* Pods_Sonolib_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sonolib_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5FDECC6CA349A0C434878D89 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		603EF94DF8F11E25A217B1E3 /* Sonolib.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = Sonolib.podspec; path = ../Sonolib.podspec; sourceTree = "<group>"; };
+		22424D8824C7171F00BF90AF /* WalletTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTests.swift; sourceTree = "<group>"; };
+		22424D9224C71BD600BF90AF /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
+		22424D9324C71BD600BF90AF /* CoinTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTests.swift; sourceTree = "<group>"; };
+		22424D9424C71BD600BF90AF /* ProxyClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyClientTests.swift; sourceTree = "<group>"; };
+		5FDECC6CA349A0C434878D89 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		603EF94DF8F11E25A217B1E3 /* Sonolib.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Sonolib.podspec; path = ../Sonolib.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		607FACE51AFB9204008FA782 /* Sonolib_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sonolib_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		88CA0C4BF0EB3D42DFFD3CB4 /* Pods-Sonolib_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sonolib_Tests.release.xcconfig"; path = "Target Support Files/Pods-Sonolib_Tests/Pods-Sonolib_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		92531B7E4741A702DCFCF978 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		92531B7E4741A702DCFCF978 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		BFA322659360EC94F65D8033 /* Pods-Sonolib_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sonolib_Tests.debug.xcconfig"; path = "Target Support Files/Pods-Sonolib_Tests/Pods-Sonolib_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,7 +65,11 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				22424D9224C71BD600BF90AF /* ClientTests.swift */,
+				22424D9324C71BD600BF90AF /* CoinTests.swift */,
+				22424D9424C71BD600BF90AF /* ProxyClientTests.swift */,
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				22424D8824C7171F00BF90AF /* WalletTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -95,7 +107,6 @@
 				BFA322659360EC94F65D8033 /* Pods-Sonolib_Tests.debug.xcconfig */,
 				88CA0C4BF0EB3D42DFFD3CB4 /* Pods-Sonolib_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -131,14 +142,9 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
-					607FACCF1AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
-					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0900;
-						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
 			};
@@ -147,6 +153,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -178,10 +185,18 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Sonolib_Tests/Pods-Sonolib_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Base58Swift/Base58Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
 				"${BUILT_PRODUCTS_DIR}/Sonolib/Sonolib.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Base58Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sonolib.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +233,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22424D8D24C7171F00BF90AF /* WalletTests.swift in Sources */,
+				22424D9524C71BD600BF90AF /* ClientTests.swift in Sources */,
+				22424D9724C71BD600BF90AF /* ProxyClientTests.swift in Sources */,
+				22424D9624C71BD600BF90AF /* CoinTests.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,7 +289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -316,7 +335,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -342,7 +361,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sonolib_Example.app/Sonolib_Example";
 			};
 			name = Debug;
 		};
@@ -360,7 +378,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sonolib_Example.app/Sonolib_Example";
 			};
 			name = Release;
 		};

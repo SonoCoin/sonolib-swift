@@ -1,0 +1,35 @@
+PODS:
+  - Alamofire (5.2.2)
+  - Base58Swift (2.1.10):
+    - BigInt (~> 5.0.0)
+  - BigInt (5.0.0)
+  - Sodium (0.8.0)
+  - Sonolib (0.1.0):
+    - Alamofire (~> 5.2)
+    - Base58Swift
+    - Sodium (~> 0.8.0)
+
+DEPENDENCIES:
+  - Sonolib (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Base58Swift
+    - BigInt
+    - Sodium
+
+EXTERNAL SOURCES:
+  Sonolib:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Base58Swift: 53d551f0b33d9478fa63b3445e453a772d6b31a7
+  BigInt: 74b4d88367b0e819d9f77393549226d36faeb0d8
+  Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
+  Sonolib: fbe871e6a77d9c753dd7d976f5404c95c605677a
+
+PODFILE CHECKSUM: 179f45c3afc2ce6b0093a92d2d69e303d93f0f43
+
+COCOAPODS: 1.8.4
