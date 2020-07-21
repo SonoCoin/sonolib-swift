@@ -18,6 +18,7 @@ final class CoinTests: XCTestCase {
     private let sender = "SCWTXwXKNJx6rpqEgV8eH4kGu1KmMoeBbAx"
     private let receiver = "SCigaYBVmALLd5bvEd3QvWL27FS8nsjssDY"
     
+    
     func testCreateCoin() {
         let e = expectation(description: "Alamofire")
         
