@@ -1,0 +1,6 @@
+use_frameworks!
+target 'Sonolib_Tests' do
+  pod 'Sonolib', :path => '../'
+  
+  
+end
