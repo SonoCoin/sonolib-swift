@@ -12,17 +12,17 @@ public class ProxyClient {
 
     public let baseAddr: String
     public let client: Client
-    
+
     static private let gas = UInt64(100000000000)
     static private let fee = UInt64(0)
     static private let gasPrice = UInt64(0)
     static private let commission = UInt64(0)
 
-    init(baseAddr: String) {
+    public init(baseAddr: String) {
         self.baseAddr = baseAddr
         self.client = Client(baseAddr: baseAddr)
     }
-    
+
     public func getNetworks(success: (([NetworkDto]) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/info/networks"
         do {
@@ -31,7 +31,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     public func getHistory(network: String, address: String, success: (([HistoryItemDto]) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/history/\(network)/\(address)"
         do {
@@ -40,7 +40,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     public func getBalance(network: String, address: String, success: ((BalanceExtendedDto) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/wallets/\(network)/\(address)/balance"
         do {
@@ -49,7 +49,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     public func getBalances(network: String, addresses: [String], success: (([BalanceExtendedDto]) -> Void)?, error: ((String) -> Void)?) {
         let req = BalanceRequestDto(addresses: addresses)
         
@@ -60,7 +60,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     public func getTokenBalances(network: String, address: String, success: (([ContractBalanceDto]) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/contracts/\(network)/\(address)/balances"
         do {
@@ -69,7 +69,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     // static call
     public func staticCall(network: String, contract: String, payload: String, success: ((String) -> Void)?, error: ((String) -> Void)?) {
         let req = StaticCallRequestDto(address: contract, payload: payload)
@@ -83,12 +83,12 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     // consumed fee
     public func consumedFee(network: String, sender: String, contract: String, payload: String, success: ((UInt64) -> Void)?, error: ((String) -> Void)?) {
         self.consumedFee(network: network, sender: sender, contract: contract, payload: payload, value: Sono.zero, commission: Sono.zero, success: success, error: error)
     }
-    
+
     public func consumedFee(network: String, sender: String, contract: String, payload: String, value: UInt64, commission: UInt64, success: ((UInt64) -> Void)?, error: ((String) -> Void)?) {
         let req = ContractMessageDto(sender: sender, address: contract, payload: payload, value: value, gas: commission)
 
@@ -101,7 +101,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     public func getContracts(network: String, success: (([ContractDto]) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/contracts/\(network)"
         do {
@@ -110,7 +110,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     public func getContract(network: String, address: String, success: ((ContractDto) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/contracts/\(network)/\(address)"
         do {
@@ -119,7 +119,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     public func getCoinContract(network: String, success: ((ContractCoinDto) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/contracts/\(network)/coin"
         do {
@@ -128,7 +128,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     private func getNonce(network: String, address: String, success: ((NonceDto) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/node/\(network)/account/\(address)/nonce"
         do {
@@ -137,7 +137,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     private func getAllowanceNonce(network: String, address: String, success: ((NonceDto) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/node/\(network)/wallet/\(address)/allowance_nonce"
         do {
@@ -146,7 +146,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     private func send(network: String, tx: TransactionRequest, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/node/\(network)/txs/publish"
         do {
@@ -157,7 +157,7 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
-    
+
     public func send(network: String, words: String, walletIndex: Int, receiver: String, amount: Decimal, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
         do {
             let val = amount.satoshi
@@ -227,7 +227,6 @@ public class ProxyClient {
     }
     
     // Coins
-    
     public func createCoin(network: String, words: String, walletIndex: Int, contract: String, amount: Decimal, success: ((String) -> Void)?, error: ((String) -> Void)?) {
         do {
             let val = amount.satoshi
@@ -320,7 +319,6 @@ public class ProxyClient {
     }
     
     // Token coins
-    
     public func createTokenCoin(network: String, words: String, walletIndex: Int, contractAddress: String, amount: Decimal, success: ((String) -> Void)?, error: ((String) -> Void)?) {
         do {
             let mnemonic = try Mnemonic(words: words)
