@@ -9,63 +9,58 @@ import Foundation
 import CommonCrypto
 
 public struct HMAC {
-    
-    public static func digest(input : Data, algo: HMACAlgo) -> Data {
-        let digestLength = algo.digestLength
-        var hash = [UInt8](repeating: 0, count: digestLength)
-        switch algo {
-        case .MD5:
-            CC_MD5(input.bytes, UInt32(input.count), &hash)
-            break
-        case .SHA1:
-            CC_SHA1(input.bytes, UInt32(input.count), &hash)
-            break
-        case .SHA224:
-            CC_SHA224(input.bytes, UInt32(input.count), &hash)
-            break
-        case .SHA256:
-            CC_SHA256(input.bytes, UInt32(input.count), &hash)
-            break
-        case .SHA384:
-            CC_SHA384(input.bytes, UInt32(input.count), &hash)
-            break
-        case .SHA512:
-            CC_SHA512(input.bytes, UInt32(input.count), &hash)
-            break
-        }
-        return Data(bytes: hash, count: digestLength)
-    }
-    
-}
 
-public enum HMACAlgo {
-    
-    case MD5, SHA1, SHA224, SHA256, SHA384, SHA512
+    // MARK: - Types
+    public enum Algorithm {
+        case sha1
+        case md5
+        case sha256
+        case sha384
+        case sha512
+        case sha224
 
-    var HMACAlgorithm: CCHmacAlgorithm {
-        var result: Int = 0
-        switch self {
-        case .MD5:      result = kCCHmacAlgMD5
-        case .SHA1:     result = kCCHmacAlgSHA1
-        case .SHA224:   result = kCCHmacAlgSHA224
-        case .SHA256:   result = kCCHmacAlgSHA256
-        case .SHA384:   result = kCCHmacAlgSHA384
-        case .SHA512:   result = kCCHmacAlgSHA512
+        public var algorithm: CCHmacAlgorithm {
+            switch self {
+            case .md5: return CCHmacAlgorithm(kCCHmacAlgMD5)
+            case .sha1: return CCHmacAlgorithm(kCCHmacAlgSHA1)
+            case .sha224: return CCHmacAlgorithm(kCCHmacAlgSHA224)
+            case .sha256: return CCHmacAlgorithm(kCCHmacAlgSHA256)
+            case .sha384: return CCHmacAlgorithm(kCCHmacAlgSHA384)
+            case .sha512: return CCHmacAlgorithm(kCCHmacAlgSHA512)
+            }
         }
-        return CCHmacAlgorithm(result)
+
+        public var digestLength: Int {
+            switch self {
+            case .md5: return Int(CC_MD5_DIGEST_LENGTH)
+            case .sha1: return Int(CC_SHA1_DIGEST_LENGTH)
+            case .sha224: return Int(CC_SHA224_DIGEST_LENGTH)
+            case .sha256: return Int(CC_SHA256_DIGEST_LENGTH)
+            case .sha384: return Int(CC_SHA384_DIGEST_LENGTH)
+            case .sha512: return Int(CC_SHA512_DIGEST_LENGTH)
+            }
+        }
     }
 
-    var digestLength: Int {
-        var result: Int32 = 0
-        switch self {
-        case .MD5:      result = CC_MD5_DIGEST_LENGTH
-        case .SHA1:     result = CC_SHA1_DIGEST_LENGTH
-        case .SHA224:   result = CC_SHA224_DIGEST_LENGTH
-        case .SHA256:   result = CC_SHA256_DIGEST_LENGTH
-        case .SHA384:   result = CC_SHA384_DIGEST_LENGTH
-        case .SHA512:   result = CC_SHA512_DIGEST_LENGTH
+    // MARK: - Signing
+    public static func sign(data: Data, algorithm: Algorithm, key: Data) -> Data {
+        let signature = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: algorithm.digestLength)
+        defer { signature.deallocate() }
+
+        data.withUnsafeBytes { dataBytes in
+            key.withUnsafeBytes { keyBytes in
+                CCHmac(algorithm.algorithm, keyBytes.baseAddress, key.count, dataBytes.baseAddress, data.count, signature)
+            }
         }
-        return Int(result)
+
+        return Data(bytes: signature, count: algorithm.digestLength)
     }
-    
+
+    public static func sign(message: String, algorithm: Algorithm, key: String) -> String? {
+        guard let messageData = message.data(using: .utf8),
+            let keyData = key.data(using: .utf8)
+        else { return nil }
+
+        return sign(data: messageData, algorithm: algorithm, key: keyData).hex
+    }
 }

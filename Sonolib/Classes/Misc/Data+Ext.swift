@@ -18,9 +18,9 @@ extension Data {
         return map { String(format: "%02hhx", $0) }.joined()
     }
     
-    var sha512: Data {
-        return HMAC.digest(input: self, algo: HMACAlgo.SHA512)
-    }
+//    var sha512: Data {
+//        return HMAC.digest(input: self, algo: HMACAlgo.SHA512)
+//    }
     
 }
 

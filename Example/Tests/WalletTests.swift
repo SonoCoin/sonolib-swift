@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import Sonolib
+@testable import Sonolib
 
 class WalletTests: XCTestCase {
 

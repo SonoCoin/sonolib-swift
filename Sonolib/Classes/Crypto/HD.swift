@@ -71,12 +71,14 @@ public class HD {
         buffer.append(contentsOf: parentKey)
         buffer.append(contentsOf: index.bdata)
         
-        let digest = buffer.sha512
+//        let digest = buffer.sha512
+        let digest = HMAC.sign(data: buffer, algorithm: .sha512, key: parentChainCode)
         return MasterKey(data: digest)
     }
     
     static private func getMasterKeyFrom(seed: Data) -> MasterKey {
-        let digest = seed.sha512;
+//        let digest = seed.sha512;
+        let digest = HMAC.sign(data: seed, algorithm: .sha512, key: HD.ED25519_CURVE.data(using: .utf8)!)
         return MasterKey(data: digest)
     }
     
