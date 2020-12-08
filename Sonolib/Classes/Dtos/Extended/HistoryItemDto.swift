@@ -20,7 +20,7 @@ public struct HistoryItemDto {
     public var fromAddress: String
     public var toAddress: String
     public var contractAddress: String?
-    public var dt: Date?
+    public var dt: String?
     public var status: String
     public var nodeId: String?
     public var priceUsd: Decimal
@@ -50,8 +50,8 @@ extension HistoryItemDto: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.network = try container.decode(String.self, forKey: .network)
-        self.blockHash = try container.decode(String.self, forKey: .blockHash)
-        self.txHash = try container.decode(String.self, forKey: .txHash)
+        self.blockHash = try container.decodeIfPresent(String.self, forKey: .blockHash)
+        self.txHash = try container.decodeIfPresent(String.self, forKey: .txHash)
         self.ticker = try container.decode(String.self, forKey: .ticker)
         self.isToken = try container.decode(Bool.self, forKey: .isToken)
         self.commission = try container.decode(Decimal.self, forKey: .commission)
@@ -60,10 +60,10 @@ extension HistoryItemDto: Decodable {
         self.type = try container.decode(String.self, forKey: .type)
         self.fromAddress = try container.decode(String.self, forKey: .fromAddress)
         self.toAddress = try container.decode(String.self, forKey: .toAddress)
-        self.contractAddress = try container.decode(String.self, forKey: .contractAddress)
-        self.dt = try container.decode(Date.self, forKey: .dt)
+        self.contractAddress = try container.decodeIfPresent(String.self, forKey: .contractAddress)
+        self.dt = try container.decodeIfPresent(String.self, forKey: .dt)
         self.status = try container.decode(String.self, forKey: .status)
-        self.nodeId = try container.decode(String.self, forKey: .nodeId)
+        self.nodeId = try container.decodeIfPresent(String.self, forKey: .nodeId)
         self.priceUsd = try container.decode(Decimal.self, forKey: .priceUsd)
     }
 }

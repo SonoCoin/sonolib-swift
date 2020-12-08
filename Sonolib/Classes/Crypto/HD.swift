@@ -48,9 +48,10 @@ public class HD {
     }
     
     public static func derivePath(path: String, seed: Data) throws -> MasterKey {
-        if (!HD.isValid(path: path)) {
-            throw HDError.invalidPath
-        }
+        // @TODO FIXME
+//        if (!HD.isValid(path: path)) {
+//            throw HDError.invalidPath
+//        }
         
         var mk = HD.getMasterKeyFrom(seed: seed)
         var key = mk.key

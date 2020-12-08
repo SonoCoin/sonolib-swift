@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Sonolib'
-  s.version          = '1.0.4'
+  s.version          = '1.0.7'
   s.summary          = 'Sonolib swift version.'
   s.swift_versions   = '5.0'
 
@@ -18,9 +18,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  # s.description      = 
 
   s.homepage         = 'https://github.com/sonocoin/sonolib-swift'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
@@ -31,6 +29,9 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '13.0'
 
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+
   s.source_files = 'Sonolib/Classes/**/*'
   
   # s.resource_bundles = {
@@ -40,7 +41,7 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'Sodium', '~> 0.8.0'
+  s.dependency 'Sodium-Fork', '~> 0.8.0'
   s.dependency "Base58Swift"
   s.dependency 'Alamofire', '~> 5.2'
 end
