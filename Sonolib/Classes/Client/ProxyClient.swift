@@ -85,11 +85,11 @@ public class ProxyClient {
     }
 
     // consumed fee
-    public func consumedFee(network: String, sender: String, contract: String, payload: String, success: ((UInt64) -> Void)?, error: ((String) -> Void)?) {
+    public func consumedFee(network: String, sender: String, contract: String?, payload: String, success: ((UInt64) -> Void)?, error: ((String) -> Void)?) {
         self.consumedFee(network: network, sender: sender, contract: contract, payload: payload, value: Sono.zero, commission: Sono.zero, success: success, error: error)
     }
 
-    public func consumedFee(network: String, sender: String, contract: String, payload: String, value: UInt64, commission: UInt64, success: ((UInt64) -> Void)?, error: ((String) -> Void)?) {
+    public func consumedFee(network: String, sender: String, contract: String?, payload: String, value: UInt64, commission: UInt64, success: ((UInt64) -> Void)?, error: ((String) -> Void)?) {
         let req = ContractMessageDto(sender: sender, address: contract, payload: payload, value: value, gas: commission)
 
         let url = self.baseAddr + "/node/\(network)/contract/consumed_fee"
@@ -423,6 +423,39 @@ public class ProxyClient {
                     error?(err.localizedDescription)
                 }
             }, error: error)
+        } catch let err {
+            error?(err.localizedDescription)
+        }
+    }
+    
+    // Token builder
+    func createToken(network: String, words: String, walletIndex: Int, payload: String, feeAddress: String, fee: Decimal, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
+        do {
+            let mnemonic = try Mnemonic(words: words)
+            let hd = try mnemonic.toHD(index: walletIndex)
+            let sender = hd.toWallet().base58Address
+
+            self.getNonce(network: network, address: sender, success: { nonce in
+                self.consumedFee(network: network, sender: sender, contract: nil, payload: payload, success: { consumedFee in
+                    do {
+                        let tx = try TransactionRequest()
+                            .addCommission(gasPrice: ProxyClient.gasPrice, transferCommission: ProxyClient.gas)
+
+                            .addSender(address: sender, key: hd, value: fee.satoshi, nonce: nonce.unconfirmedNonce)
+
+                            .addTransfer(address: feeAddress, value: fee.satoshi)
+                            .addContractCreation(sender: sender, code: payload, value: Sono.zero, gas: ProxyClient.gas)
+                            .sign()
+
+                        self.send(network: network, tx: tx, success: { result in
+                            success?(result)
+                        }, error: error)
+                    } catch let err {
+                        error?(err.localizedDescription)
+                    }
+                }, error: error)
+            }, error: error)
+            
         } catch let err {
             error?(err.localizedDescription)
         }

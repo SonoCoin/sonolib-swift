@@ -23,7 +23,7 @@ public struct ContractMessageDto {
         self.gas = gas
     }
     
-    public init(sender: String, address: String, payload: String, value: UInt64, gas: UInt64) {
+    public init(sender: String, address: String?, payload: String, value: UInt64, gas: UInt64) {
         self.sender = sender
         self.address = address
         self.payload = payload

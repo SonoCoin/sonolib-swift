@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Sonolib'
-  s.version          = '1.0.7'
+  s.version          = '1.0.8'
   s.summary          = 'Sonolib swift version.'
   s.swift_versions   = '5.0'
 
