@@ -40,6 +40,15 @@ public class ProxyClient {
             error?(err.localizedDescription)
         }
     }
+    
+    public func getHistorySample(network: String, address: String, success: (([HistoryItemDto]) -> Void)?, error: ((String) -> Void)?) {
+        let url = self.baseAddr + "/history/\(network)/\(address)/sample"
+        do {
+            try self.client.get(url: url, type: [HistoryItemDto].self, success: success, error: error)
+        } catch let err {
+            error?(err.localizedDescription)
+        }
+    }
 
     public func getBalance(network: String, address: String, success: ((BalanceExtendedDto) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/wallets/\(network)/\(address)/balance"
