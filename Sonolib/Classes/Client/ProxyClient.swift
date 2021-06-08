@@ -438,7 +438,7 @@ public class ProxyClient {
     }
     
     // Token builder
-    func createToken(network: String, words: String, walletIndex: Int, payload: String, feeAddress: String, fee: Decimal, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
+    public func createToken(network: String, words: String, walletIndex: Int, payload: String, feeAddress: String, fee: Decimal, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
         do {
             let mnemonic = try Mnemonic(words: words)
             let hd = try mnemonic.toHD(index: walletIndex)
