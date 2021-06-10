@@ -156,10 +156,10 @@ public class ProxyClient {
         }
     }
 
-    private func send(network: String, tx: TransactionRequest, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
+    private func send(network: String, requestId: String? = nil, tx: TransactionRequest, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
         let url = self.baseAddr + "/node/\(network)/txs/publish"
         do {
-            try self.client.post(url: url, data: tx, type: TxPublishResponseDto.self, success: { res in
+            try self.client.post(url: url, requestId: requestId, data: tx, type: TxPublishResponseDto.self, success: { res in
                 success?(res.result == "ok")
             }, error: error)
         } catch let err {
@@ -438,7 +438,7 @@ public class ProxyClient {
     }
     
     // Token builder
-    public func createToken(network: String, words: String, walletIndex: Int, payload: String, feeAddress: String, fee: Decimal, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
+    public func createToken(network: String, words: String, walletIndex: Int, requestId: String? = nil, payload: String, feeAddress: String, fee: Decimal, success: ((Bool) -> Void)?, error: ((String) -> Void)?) {
         do {
             let mnemonic = try Mnemonic(words: words)
             let hd = try mnemonic.toHD(index: walletIndex)
@@ -456,7 +456,7 @@ public class ProxyClient {
                             .addContractCreation(sender: sender, code: payload, value: Sono.zero, gas: ProxyClient.gas)
                             .sign()
 
-                        self.send(network: network, tx: tx, success: { result in
+                        self.send(network: network, requestId: requestId, tx: tx, success: { result in
                             success?(result)
                         }, error: error)
                     } catch let err {

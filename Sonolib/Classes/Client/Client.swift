@@ -41,11 +41,16 @@ public class Client {
         }
     }
     
-    public func post<T1, T2>(url: String, method: HTTPMethod = .get, data: T1, type: T2.Type, success: ((T2) -> Void)?, error: ((String) -> Void)?) throws where T1 : Encodable, T2 : Decodable {
+    public func post<T1, T2>(url: String, method: HTTPMethod = .get, requestId: String? = nil, data: T1, type: T2.Type, success: ((T2) -> Void)?, error: ((String) -> Void)?) throws where T1 : Encodable, T2 : Decodable {
         var request = URLRequest(url: URL(string: url)!)
 
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let reqId = requestId {
+            request.setValue(reqId, forHTTPHeaderField: "Sono-Request-Id")
+        }
+        
         let json = try self.encoder.encode(data)
         
         request.httpBody = json
@@ -71,17 +76,6 @@ public class Client {
             case .failure(let err):
                 error?(err.localizedDescription)
             }
-        }
-    }
-    
-    public func testPost(success: ((TestPostDto) -> Void)?, error: ((String) -> Void)?) {
-        let url = self.baseAddr + "/info/testpost"
-        let request = TestPostDto(key: "111", value: "222")
-        
-        do {
-            try self.post(url: url, method: .post, data: request, type: TestPostDto.self, success: success, error: error)
-        } catch let err {
-            error?(err.localizedDescription)
         }
     }
     
