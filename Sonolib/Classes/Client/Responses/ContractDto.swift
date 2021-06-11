@@ -14,6 +14,7 @@ public struct ContractDto {
     public var sender: String
     public var type: String
     public var name: String?
+    public var logo: String?
     public var symbol: String?
     public var decimals: Int?
     public var totalSupply: UInt64?
