@@ -40,6 +40,7 @@ extension ContractDto: Decodable {
         case isParsed
         case txHash
         case network
+        case logo
     }
     
     public init(from decoder: Decoder) throws {
@@ -57,6 +58,7 @@ extension ContractDto: Decodable {
         self.isParsed = try container.decode(Bool.self, forKey: .isParsed)
         self.txHash = try container.decode(String.self, forKey: .txHash)
         self.network = try container.decode(String.self, forKey: .network)
+        self.logo = try container.decodeIfPresent(String.self, forKey: .logo)
     }
     
 }
